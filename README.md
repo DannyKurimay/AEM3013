@@ -29,8 +29,7 @@
   Briefly describe what is being shown in the figure.
 
  ## Fig. 3: Time Derivatives
- <Time-derivative of height and range for the fitted trajectory>
- ![](https://github.com/DannyKurimay/AEM3013/blob/master/docs/xyvelocity.png)
+ <Time-derivative of height and range for the fitted trajectory>![](https://github.com/DannyKurimay/AEM3013/blob/master/docs/xyvelocity.png)
 
 
   Briefly describe what is being shown in the figure.
