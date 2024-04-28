@@ -29,34 +29,98 @@
 	tspan	=	[to tf];
 	xo		=	[V;Gam;H;R];
 	[ta,xa]	=	ode23('EqMotion',tspan,xo);
-	
-%	b) Oscillating Glide due to Zero Initial Flight Path Angle
-	xo		=	[V;0;H;R];
-	[tb,xb]	=	ode23('EqMotion',tspan,xo);
 
-%	c) Effect of Increased Initial Velocity
-	xo		=	[1.5*V;0;H;R];
-	[tc,xc]	=	ode23('EqMotion',tspan,xo);
+%% Part 2
 
-%	d) Effect of Further Increase in Initial Velocity
-	xo		=	[3*V;0;H;R];
-	[td,xd]	=	ode23('EqMotion',tspan,xo);
-	
+    xo		=	[V;Gam+.4;H;R];
+	[ta,xahighgamma]	=	ode23('EqMotion',tspan,xo);
+    xo		=	[V;Gam-.5;H;R];
+	[ta,xalowgamma]	=	ode23('EqMotion',tspan,xo);
+
+    xo		=	[V+7.5;Gam;H;R];
+	[ta,xahighv]	=	ode23('EqMotion',tspan,xo);
+    xo		=	[V-2;Gam;H;R];
+	[ta,xalowv]	=	ode23('EqMotion',tspan,xo);
+   
 	figure
-	plot(xa(:,4),xa(:,3),xb(:,4),xb(:,3),xc(:,4),xc(:,3),xd(:,4),xd(:,3))
-	xlabel('Range, m'), ylabel('Height, m'), grid
+    title("test")
+    subplot(2,1,1);
+    title("Varied Initial Flight Path Angle")
+    hold on 
+    plot(xahighgamma(:,4),xahighgamma(:,3), color= [0,1,0])
+    plot(xalowgamma(:,4),xalowgamma(:,3), color = [1,0,0])
+    plot(xa(:,4),xa(:,3),color = [0,0,0])
+    legend("High angle", "Low angle", "Nominal angle")
+    xlabel("range (m)")
+    ylabel("height (m)")
 
-	% figure
-	% subplot(2,2,1)
-	% plot(ta,xa(:,1),tb,xb(:,1),tc,xc(:,1),td,xd(:,1))
-	% xlabel('Time, s'), ylabel('Velocity, m/s'), grid
-	% subplot(2,2,2)
-	% plot(ta,xa(:,2),tb,xb(:,2),tc,xc(:,2),td,xd(:,2))
-	% xlabel('Time, s'), ylabel('Flight Path Angle, rad'), grid
-	% subplot(2,2,3)
-	% plot(ta,xa(:,3),tb,xb(:,3),tc,xc(:,3),td,xd(:,3))
-	% xlabel('Time, s'), ylabel('Altitude, m'), grid
-	% subplot(2,2,4)
-	% plot(ta,xa(:,4),tb,xb(:,4),tc,xc(:,4),td,xd(:,4))
-	% xlabel('Time, s'), ylabel('Range, m'), grid
+     subplot(2,1,2);
+    title("Varied Initial Velocity")
+    subtitle("Instructions say [+2, +7.5], but they are both higher, I thought this was a mistake and assumed[-2, +7.5] to be the intended numbers",FontSize=7)
+    hold on 
+    plot(xahighv(:,4),xahighv(:,3), color= [0,1,0])
+    plot(xalowv(:,4),xalowv(:,3), color = [1,0,0])
+    plot(xa(:,4),xa(:,3),color = [0,0,0])
+    legend("High v", "Low v", "Nominal v")
+    xlabel("range (m)")
+    ylabel("height (m)")
+    hold off
+
+%% Part 3
+    %pmin + (pmax-pmin)*rand(1)
+    tspan = to:.1:tf;
+    rangearray = [];
+    heightarray = [];
+    timearray = [tspan];
+
+    figure
+    hold on
+    for i = 0:100
+        randv = rand;
+        randg = rand;
+        xo = [1.55 + 9.5*randv;-0.68 + 0.9*randg;H;R];
+	[ta,xr]	= ode23('EqMotion',tspan,xo);
+    plot(xr(:,4),xr(:,3), color = [randv,randg,0])
+    subtitle("Red = higher V, green = higher angle, black = average curve fit")
+    rangearray(i+1,:) = xr(:,4);
+    heightarray(i+1,:) = xr(:,3);
+    end
+
+    title("2D Trajectory of paper airplane with random initial conditions")
+    xlabel("range (m)")
+    ylabel("height (m)")
+
+ %% Part 4 
+    n = 15 % degree polynomial
+
+    p = polyfit(timearray, mean(heightarray),n)
+    avgheight = polyval(p, timearray);
+  
+    p = polyfit(timearray, mean(rangearray),n)
+    avgrange = polyval(p, timearray);
+    plot(avgrange,avgheight, LineWidth=3, color= [0,0,0])
+    hold off
+    figure
+    hold on
+    plot(timearray, avgheight, LineWidth=2)
+    plot(timearray, avgrange, LineWidth=2)
+    legend("Average height", "Average range")
+    xlabel("time (s)")
+    ylabel("(m)")
+
+ %% Part 5
+    
+    figure
+    subplot(2,1,1)
+    plot(trimdata(timearray,60),diff(avgrange), linewidth = 1)
+    title("Change in average range (x velocity)")
+    xlabel("time (s)")
+    ylabel("(m/s)")
+    subplot(2,1,2)
+    plot(trimdata(timearray,60),diff(avgheight), linewidth = 1)
+    title("Change in average height (y velocity)")
+    xlabel("time (s)")
+    ylabel("(m/s)")
+
+
 
