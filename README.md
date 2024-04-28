@@ -19,7 +19,7 @@
   ## Fig. 1: Single Parameter Variation
   <2D trajectory simulated by varying single parameter at at time>
   <The above plot should also show the nominal trajectory>
-  ![alt text](https://github.com//DannyKurimay/AEM3013/docs/controlledvariation.png?raw=true)
+  ![alt text](https://github.com//DannyKurimay/AEM3013/docs/controlledvariation.png)
 
   Briefly describe what is being shown in the figure.
 
