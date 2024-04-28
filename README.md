@@ -18,16 +18,18 @@
 
   ## Fig. 1: Single Parameter Variation
   <2D trajectory simulated by varying single parameter at at time>
-  <The above plot should also show the nominal trajectory>
-
+  ![](https://github.com/DannyKurimay/AEM3013/blob/master/docs/controlledvariation.png)
+  
   Briefly describe what is being shown in the figure.
 
   ## Fig. 2: Monte Carlo Simulation
-  <2D trajectories simulated using random sampling of parameters, overlay polynomial fit onto plot.>
+  <2D trajectories simulated using random sampling of parameters, overlayed polynomial fit onto plot.>
+  ![](https://github.com/DannyKurimay/AEM3013/blob/master/docs/randomvariation.png)
 
   Briefly describe what is being shown in the figure.
 
  ## Fig. 3: Time Derivatives
- <Time-derivative of height and range for the fitted trajectory>
+ <Time-derivative of height and range for the fitted trajectory>![](https://github.com/DannyKurimay/AEM3013/blob/master/docs/xyvelocity.png)
+
 
   Briefly describe what is being shown in the figure.
