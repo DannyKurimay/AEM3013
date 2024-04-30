@@ -71,7 +71,6 @@ clear
     ylabel("height (m)")
  % Save figures
     saveas(plot1, 'docs/controlledvariation.png');
-    hold off
 
 
 
