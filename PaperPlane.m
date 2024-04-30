@@ -32,17 +32,17 @@
 
 %% Part 2
 
-    xo		=	[V;Gam+.4;H;R];
+    xo		=	[V;.4;H;R];
 	[ta,xahighgamma]	=	ode23('EqMotion',tspan,xo);
-    xo		=	[V;Gam-.5;H;R];
+    xo		=	[V;-.5;H;R];
 	[ta,xalowgamma]	=	ode23('EqMotion',tspan,xo);
 
-    xo		=	[V+7.5;Gam;H;R];
+    xo		=	[7.5;Gam;H;R];
 	[ta,xahighv]	=	ode23('EqMotion',tspan,xo);
-    xo		=	[V-2;Gam;H;R];
+    xo		=	[2;Gam;H;R];
 	[ta,xalowv]	=	ode23('EqMotion',tspan,xo);
    
-	figure
+	plot1 = figure;
     title("test")
     subplot(2,1,1);
     title("Varied Initial Flight Path Angle")
@@ -56,7 +56,7 @@
 
      subplot(2,1,2);
     title("Varied Initial Velocity")
-    subtitle("Instructions say [+2, +7.5], but they are both higher, I thought this was a mistake and assumed[-2, +7.5] to be the intended numbers",FontSize=7)
+    subtitle("t",FontSize=7)
     hold on 
     plot(xahighv(:,4),xahighv(:,3), color= [0,1,0])
     plot(xalowv(:,4),xalowv(:,3), color = [1,0,0])
@@ -64,21 +64,25 @@
     legend("High v", "Low v", "Nominal v")
     xlabel("range (m)")
     ylabel("height (m)")
+
+    saveas(plot1, 'docs/controlledvariation.png');
     hold off
 
-%% Part 3
+
+
+%% Part 3/4
     %pmin + (pmax-pmin)*rand(1)
     tspan = to:.1:tf;
     rangearray = [];
     heightarray = [];
     timearray = [tspan];
 
-    figure
+    plot2 = figure;
     hold on
     for i = 0:100
         randv = rand;
         randg = rand;
-        xo = [1.55 + 9.5*randv;-0.68 + 0.9*randg;H;R];
+        xo = [2 + 7.5*randv;-0.5 + 0.4*randg;H;R];
 	[ta,xr]	= ode23('EqMotion',tspan,xo);
     plot(xr(:,4),xr(:,3), color = [randv,randg,0])
     subtitle("Red = higher V, green = higher angle, black = average curve fit")
@@ -90,27 +94,31 @@
     xlabel("range (m)")
     ylabel("height (m)")
 
- %% Part 4 
-    n = 15 % degree polynomial
+    
 
-    p = polyfit(timearray, mean(heightarray),n)
+ % Part 4 
+    n = 9; % degree polynomial
+
+    p = polyfit(timearray, mean(heightarray),n);
     avgheight = polyval(p, timearray);
   
-    p = polyfit(timearray, mean(rangearray),n)
+    p = polyfit(timearray, mean(rangearray),n);
     avgrange = polyval(p, timearray);
     plot(avgrange,avgheight, LineWidth=3, color= [0,0,0])
     hold off
-    figure
-    hold on
-    plot(timearray, avgheight, LineWidth=2)
-    plot(timearray, avgrange, LineWidth=2)
-    legend("Average height", "Average range")
-    xlabel("time (s)")
-    ylabel("(m)")
+    saveas(plot2, 'docs/randomvariation.png');
+
+    % figure        I dont think this was needed
+    % hold on
+    % plot(timearray, avgheight, LineWidth=2)
+    % plot(timearray, avgrange, LineWidth=2)
+    % legend("Average height", "Average range")
+    % xlabel("time (s)")
+    % ylabel("(m)")
 
  %% Part 5
     
-    figure
+    plot3 = figure;
     subplot(2,1,1)
     plot(trimdata(timearray,60),diff(avgrange), linewidth = 1)
     title("Change in average range (x velocity)")
@@ -121,6 +129,7 @@
     title("Change in average height (y velocity)")
     xlabel("time (s)")
     ylabel("(m/s)")
+    saveas(plot3, 'docs/xyvelocity.png');
 
 
 
