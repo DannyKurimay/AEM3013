@@ -6,6 +6,13 @@
   ## Summary of Findings
   <Show the variations studied in a table>
 
+    | idk | Velocity | Gamma |
+    | -------- | -------- | -------- |
+    | High    | 7.5 (m/s)     | 0.4 (rad)    |
+    | Nominal    | 3.55 (m/s)    | -0.18 (rad)     |
+    | Low    | 2 (m/s)  | -0.5 (rad) |
+
+
   Summarized what was accomplished in this study.  Describe 2-4 observations from simulating the flight path.
   Reference the figures below as needed.
 
