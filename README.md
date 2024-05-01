@@ -6,7 +6,7 @@
   ## Summary of Findings
 
  Velocity has a bigger affect on range and height than flight path angle, this can clearly be seen in [figure 1](#Fig-1-Single-Parameter-Variation). The flight path angle variations dont change the outcome by much compared to the velocity variations seen in the lower subplot.
- This is supported in [figure 2](#Fig. 2: Monte Carlo Simulation), where we can see that the majority paths with higher range had a high initial velocity.  
+ This is supported in [figure 2](#Fig-2-Monte-Carlo-Simulation), where we can see that the majority paths with higher range had a high initial velocity.  
  Another observation we can make is that planes with extreme initial conditions eventually normalize. This can again be seen in [figure 2](#Fig-2-Monte-Carlo-Simulation), where planes with a high initial velocity and those with a high initial flight path angle go very high or very low at first, but then straighten out to an almost linear path.
  This is suppored further by [figure 3](#Fig-3-Time-Derivatives), were we can see that the average x and y velocity is more extreme at the beginnging, and slowly flattens out over time 
 
