@@ -19,7 +19,7 @@
 
  
   # Code Listing
-  [Single parameter variation](https://github.com/DannyKurimay/AEM3013/blob/master/SingleParameterVariation.m#L26-L73) Makes plot of paper airplane trajectory, indivually varying velocity and flight path angle.  
+  [Single parameter variation](https://github.com/DannyKurimay/AEM3013/blob/master/SingleParameterVariation.m#L26-L73) Makes plot of paper airplane trajectory, individually varying velocity and flight path angle.  
   [Monte carlo simulation](https://github.com/DannyKurimay/AEM3013/blob/master/MonteCarlo.m#L3-L29) simulates and graphs 100 random paper airplane flights.  
   [Monte carlo curve fit](https://github.com/DannyKurimay/AEM3013/blob/master/MonteCarlo.m#L31-L40) uses polynomial fitting to graph an average flight path across 100 fights.  
   [Time derivatives for monte carlo curve fit](https://github.com/DannyKurimay/AEM3013/blob/master/MonteCarlo.m#L42-L55) takes time derivatives of range and height of the polynomial to get average x and y velocity.  
